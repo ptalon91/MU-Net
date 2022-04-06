@@ -1,0 +1,5 @@
+data_path : '/Optical-Infrared/'
+batch_size: 1
+train_epoch: 10
+start_train_epoch : 0
+loss_info_save_path: '/Optical-Infrared/loss'

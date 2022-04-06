@@ -1,0 +1,22 @@
+reference_images_path: '/Optical-Infrared/ref/'
+sensed_image_path: '/Optical-Infrared/sen/'
+image_format: ['.jpg', '.png', '.tif', '.bmp']
+resize: [512,512]
+label_save_path: '/Optical-Infrared/image_pair.txt'
+is_data_augmentation: False
+sensed_image_warp_setting:
+    num_warp_per_image: 2
+    rotate:
+        is_rotate_warp: True
+        rotate_range: 45
+    translate:
+        is_translate_warp: True
+        translate_range: 20
+    scale:
+        is_scale_warp: True
+        scale_range: [0.75, 1.5]
+    shear:
+        is_shearX_warp: False
+        is_shearY_warp: False
+        shear_range: 5
+image_pair_save_path: '/Optical-Infrared/'
