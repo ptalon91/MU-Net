@@ -1,4 +1,4 @@
-# Multi-Scale-Unsupervised-Framework-MSUF
+# MU-Net
 This is an implementation of our paper: MU-Net: A multiscale unsupervised network for remote sensing image registration.
 ![Proposed Framework in the Paper](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/MU-Net.png)
 ## Preparation
@@ -14,11 +14,8 @@ loss.py: Store various loss functions.
 
 train.py : Training Process.
 
-test.py: Testing Process.
-
 STN.py: Similarity,Affine or Homography Transformation based on STN.
 
-CFOG.cp38-win_amd64.pyd: Similarity evaluation for multi-modal images is recommand as the NCC on the Chanel Feature of Orientated Gradient (CFOG) feature map. We provide this executable version of the CFOG descriptor, You could use 'import CFOG' to call this descriptor or adopt thr other descriptors (i.e. HOPC, HOG or LSS) in your code.
 ## Datasets
 The multi-modal original image pairs adopted in the paper have been uploaded to Google Drive. You could download them and put them into generation.py to generate the training or testing image pairs.
 
