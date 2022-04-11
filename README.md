@@ -16,7 +16,7 @@ train.py : Training Process.
 
 STN.py: Similarity,Affine or Homography Transformation based on STN.
 
-descriptor: Store the CFOG or LSS dense descriptor. To use them, you may need to install matlab calling program in your Python.
+descriptor: Store the CFOG or LSS dense descriptor. To use them, you may need to install matlab calling program in your Python. (Refer Call MATLAB from Python https://ww2.mathworks.cn/help/matlab/matlab-engine-for-python.html?lang=en)
 
 ## Datasets
 The multi-modal original image pairs adopted in the paper have been uploaded to Google Drive. You could download them and put them into generation.py to generate the training or testing image pairs.
