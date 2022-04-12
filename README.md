@@ -1,5 +1,5 @@
 # MU-Net
-This is an implementation of our paper: A Multi-Scale 
+This is an implementation of our paper: A Multi-Scale Framework with Unsupervised Learning for Remote Sensing Image Registration
 ![Proposed Framework in the Paper](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/MU-Net.png)
 ## Preparation
 Our code is performed in Pytorch 1.8.0 basis on Python 3.8.
