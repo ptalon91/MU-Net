@@ -1,16 +1,18 @@
 # MU-Net
 This is an implementation of our paper: A Multi-Scale Framework with Unsupervised Learning for Remote Sensing Image Registration
 ![Proposed Framework in the Paper](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/MU-Net.png)
-## Preparation
+## Environmental Preparation
 Our code is performed in Pytorch 1.8.0 basis on Python 3.8. 
 
 If you only run the proposed Demo, the matlab calling program in Python is not required.
 
 If you want to train the network by using loss function based on CFOG, you may need to install matlab calling program in your Python. (Refer Call MATLAB from Python https://ww2.mathworks.cn/help/matlab/matlab-engine-for-python.html?lang=en).
 
-## Introduction
+## Code Introduction
 
-registration_demo_single_scale.py: This is a simplified version of registration demo. With a fine-trained model and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration results (the corrected sensed image).
+registration_demo_single_scale.py: This is a simplified version of registration demo. With a fine-trained model and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
+
+registration_demo_multi_scale.py: This is the multi-scale version of registration demo. With three fine-trained models in multi-scale and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
 
 network.py: Our DNN architectures, implemented on three scales.
 
