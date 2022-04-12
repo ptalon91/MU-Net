@@ -41,8 +41,5 @@ Optical-Optical dataset: https://drive.google.com/file/d/1U0fpCnizcl33TgdRwvfQpq
 ![Optical-Infrared dataset](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/Optical-Infrared.png)
 Optical-Infrared dataset: https://drive.google.com/file/d/1c4Ao4CoMerntNVf2Qn3hY0eEtwURh8iM/view?usp=sharing
 
-![Optical-SAR dataset](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/Optical-SAR.png)
-Optical-SAR dataset: https://drive.google.com/file/d/181IEtG6ciBsQGhM6TgEDfv8yglAWsKxy/view?usp=sharing
-
 ![Optical-RasterMap dataset](https://github.com/yeyuanxin110/MU-Net/blob/main/githubPic/Optical-Map.png)
 Optical-RasterMap dataset: https://drive.google.com/file/d/1kIqXy3-KCTLwaPaxTrEFKSt49LvZnWAU/view?usp=sharing
