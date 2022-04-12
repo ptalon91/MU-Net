@@ -10,9 +10,11 @@ If you want to train the network by using loss function based on CFOG, you may n
 
 ## Code Introduction
 
-registration_demo_single_scale.py: This is a simplified version of registration demo. With a fine-trained model and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
+# registration_demo_single_scale.py: 
+This is a simplified version of registration demo. With a fine-trained model and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
 
-registration_demo_multi_scale.py: This is the multi-scale version of registration demo. With three fine-trained models in multi-scale and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
+# registration_demo_multi_scale.py: 
+This is the multi-scale version of registration demo. With three fine-trained models in multi-scale and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
 
 network.py: Our DNN architectures, implemented on three scales.
 
