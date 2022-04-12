@@ -9,6 +9,9 @@ If you only run the proposed Demo, the matlab calling program in Python is not r
 If you want to train the network by using loss function based on CFOG, you may need to install matlab calling program in your Python. (Refer Call MATLAB from Python https://ww2.mathworks.cn/help/matlab/matlab-engine-for-python.html?lang=en).
 
 ## Introduction
+
+registration_demo_single_scale.py: This is a simplified version of registration demo. With a fine-trained model and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration results (the corrected sensed image).
+
 network.py: Our DNN architectures, implemented on three scales.
 
 generation.py:  Generate the trainging or testing data (image pairs) by datasets provided by the paper or your own datasets. 
