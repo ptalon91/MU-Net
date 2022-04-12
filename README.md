@@ -16,9 +16,10 @@ This is a simplified version of registration demo. With a fine-trained model and
 ### registration_demo_multi_scale.py: 
 This is the multi-scale version of registration demo. With three fine-trained models in multi-scale and an image pairs (reference image and warped sensed image) as input, you could run this demo to see the registration result (the corrected sensed image).
 
-network.py: Our DNN architectures, implemented on three scales.
+### data_preprocess.py: 
+Generate the trainging or testing data (image pairs) by datasets provided by the paper or your own datasets. 
 
-generation.py:  Generate the trainging or testing data (image pairs) by datasets provided by the paper or your own datasets. 
+network.py: Our DNN architectures, implemented on three scales.
 
 dataset.py: Loading data process during training or testing.
 
