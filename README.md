@@ -20,17 +20,8 @@ This is the multi-scale version of registration demo. With three fine-trained mo
 #### data_preprocess.py: 
 Generate the trainging or testing data (image pairs) by datasets provided by the paper or your own datasets. 
 
-network.py: Our DNN architectures, implemented on three scales.
-
-dataset.py: Loading data process during training or testing.
-
-loss.py: Store various loss functions.
-
-train.py : Training Process.
-
-STN.py: Similarity,Affine or Homography Transformation based on STN.
-
-descriptor: Store the CFOG or LSS dense descriptor. To use them, you may need to install matlab calling program in your Python. (Refer Call MATLAB from Python https://ww2.mathworks.cn/help/matlab/matlab-engine-for-python.html?lang=en)
+#### train.py: 
+Training Process.
 
 ## Datasets
 The multi-modal original image pairs adopted in the paper have been uploaded to Google Drive. You could download them and put them into generation.py to generate the training or testing image pairs.
