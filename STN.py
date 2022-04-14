@@ -6,6 +6,10 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+def affineTransform(img, tps):
+    img_grid = F.affine_grid(tps, img.size())
+    img_warp = F.grid_sample(img, img_grid)
+    return img_warp
 
 def AffineTransform(reference, sensed, affine_matrix):
     sensed_grid = F.affine_grid(affine_matrix, sensed.size())
@@ -18,3 +22,11 @@ def AffineTransform(reference, sensed, affine_matrix):
     reference_grid = F.affine_grid(inv_affine_matrix_1, reference.size())
     reference_inv_tran = F.grid_sample(reference, reference_grid)
     return sensed_tran, reference_inv_tran, inv_affine_matrix
+
+
+def InverseAffineTps(tps):
+    a = torch.tensor([[[0, 0, 1]]], dtype=torch.float).to(device)
+    tps = torch.cat([tps, a], dim=1)
+    inv_tps = inverse(tps)
+    inv_tps = inv_tps[:, 0:2, :]
+    return inv_tps
