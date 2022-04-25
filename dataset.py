@@ -36,6 +36,8 @@ class MyDataSet(Dataset):
         self.sen_pil = Image.open(os.path.join(self.sen_path, self.sen_name))
         self.ref_tensor = pil_to_tensor(self.ref_pil)
         self.sen_tensor = pil_to_tensor(self.sen_pil)
+        self.ref_pil.close()
+        self.sen_pil.close()
         self.gt_tps_tensor = torch.Tensor(self.gt_tps).to(device)
         return self.ref_tensor, self.sen_tensor, self.gt_tps_tensor
 

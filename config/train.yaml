@@ -1,5 +1,5 @@
-data_path : '/Optical-Infrared/'
+data_path : 'data/optical-infrared'
 batch_size: 1
 train_epoch: 10
 start_train_epoch : 0
-loss_info_save_path: '/Optical-Infrared/loss'
+loss_info_save_path: 'data/optical-infrared/logs.txt'

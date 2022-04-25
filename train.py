@@ -80,29 +80,38 @@ def train():
             scale_3_optimizer.step()
             if i % 50 == 0:
                 print('[Epoch: %d]%f%% loss: %f' % (epoch, i / total_epoch * 100, loss))
-        loss_per_epoch = np.mean(Loss_per_batchsize)
-        save_loss_info = 'Epoch %d average loss is %f\n' % (epoch, loss_per_epoch)
-        print(save_loss_info)
-        with open(loss_info_save_path, "a") as file:
-            file.write(save_loss_info)
-        Loss_per_epoch.append(loss_per_epoch)
-        scale_1_model_name = 'scale_1_model_' + str(epoch) + '.pth'
-        sacle_1_model_save_path = os.path.join(model_save_path, 'scale_1', scale_1_model_name)
-        torch.save(scale1_model, sacle_1_model_save_path)
-        scale_2_model_name = 'scale_2_model_' + str(epoch) + '.pth'
-        sacle_2_model_save_path = os.path.join(model_save_path, 'scale_2', scale_2_model_name)
-        torch.save(scale2_model, sacle_2_model_save_path)
-        scale_3_model_name = 'scale_3_model_' + str(epoch) + '.pth'
-        sacle_3_model_save_path = os.path.join(model_save_path, 'scale_3', scale_3_model_name)
-        torch.save(scale3_model, sacle_3_model_save_path)
-        print("Epoch: {} epoch time: {:.1f}s".format(epoch, time.time() - time_epoch_start))
+        
+            if i % 1000 == 0:
+                loss_per_epoch = np.mean(Loss_per_batchsize)
+                save_loss_info = 'Epoch %d average loss is %f\n' % (epoch, loss_per_epoch)
+                print(save_loss_info)
+                with open(loss_info_save_path, "a") as file:
+                    file.write(save_loss_info)
+                Loss_per_epoch.append(loss_per_epoch)
+                scale_1_model_name = 'scale_1_model_' + str(epoch) + "_" + str(i) + '.pth'
+                if not os.path.exists(os.path.join(model_save_path, 'scale_1')):
+                    os.makedirs(os.path.join(model_save_path, 'scale_1'))
+                sacle_1_model_save_path = os.path.join(model_save_path, 'scale_1', scale_1_model_name)
+                torch.save(scale1_model, sacle_1_model_save_path)
+                scale_2_model_name = 'scale_2_model_' + str(epoch) + "_" + str(i) + '.pth'
+                if not os.path.exists(os.path.join(model_save_path, 'scale_2')):
+                    os.makedirs(os.path.join(model_save_path, 'scale_2'))
+                sacle_2_model_save_path = os.path.join(model_save_path, 'scale_2', scale_2_model_name)
+                torch.save(scale2_model, sacle_2_model_save_path)
+                scale_3_model_name = 'scale_3_model_' + str(epoch) + "_" + str(i) + '.pth'
+                if not os.path.exists(os.path.join(model_save_path, 'scale_3')):
+                    os.makedirs(os.path.join(model_save_path, 'scale_3'))
+                sacle_3_model_save_path = os.path.join(model_save_path, 'scale_3', scale_3_model_name)
+                torch.save(scale3_model, sacle_3_model_save_path)
+                print("Epoch: {} epoch time: {:.1f}s".format(epoch, time.time() - time_epoch_start))
     show_plot(Epoch, Loss_per_epoch, 'Epoch_loss')
     print("Total train time: {:.1f}s".format(time.time() - time_train_start))
 
 
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    config_file = './config/train.yaml'
+    config_file = "./MU-Net/config/train.yaml"
+    print(config_file)
     assert (os.path.exists(config_file))
     with open(config_file, 'r') as fin:
         config = yaml.safe_load(fin)
