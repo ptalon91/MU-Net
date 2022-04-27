@@ -27,6 +27,12 @@ def train():
     scale1_model = network.Scale1TPsReg().to(device)
     scale2_model = network.Scale2TPsReg().to(device)
     scale3_model = network.Scale3TPsReg().to(device)
+    # checkpoint_1 = torch.load("data/optical-infrared/train/save_model/scale_1/scale_1_model_0_3000.pth")
+    # checkpoint_2 = torch.load("data/optical-infrared/train/save_model/scale_2/scale_2_model_0_3000.pth")
+    # checkpoint_3 = torch.load("data/optical-infrared/train/save_model/scale_3/scale_3_model_0_3000.pth")
+    # scale1_model.load_state_dict(checkpoint_1["state_dict"])
+    # scale2_model.load_state_dict(checkpoint_2["state_dict"])
+    # scale3_model.load_state_dict(checkpoint_3["state_dict"])
     scale1_model.train()
     scale2_model.train()
     scale3_model.train()
@@ -55,13 +61,13 @@ def train():
             scale_1_affine_parameter = scale1_model(ref_tensor, sen_tensor)
             sen_tran_tensor, ref_inv_tensor, inv_affine_parameter_1 = AffineTransform(ref_tensor, sen_tensor,
                                                                                       scale_1_affine_parameter)
-            loss_1 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
+            loss_1 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
             "Scale: 2"
             scale_2_optimizer.zero_grad()
             scale_2_affine_parameter = scale2_model(ref_tensor, sen_tran_tensor)
             sen_tran_tensor, ref_inv_tensor, inv_affine_parameter_2 = AffineTransform(ref_tensor, sen_tran_tensor,
                                                                                       scale_2_affine_parameter)
-            loss_2 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
+            loss_2 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
             "Scale: 3"
             scale_3_optimizer.zero_grad()
             scale_3_affine_parameter = scale3_model(ref_tensor, sen_tran_tensor)
@@ -69,7 +75,7 @@ def train():
                                                                                       scale_3_affine_parameter)
             # inv_affine_parameter = torch.matmul(torch.matmul(inv_affine_parameter_1, inv_affine_parameter_2),
             #                                     inv_affine_parameter_3)
-            loss_3 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
+            loss_3 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
             loss = 0.14285714 * loss_1 + 0.28571429 * loss_2 + 0.57142857 * loss_3
             pp = loss.detach().cpu()
             if not np.isnan(pp):
@@ -88,21 +94,28 @@ def train():
                 with open(loss_info_save_path, "a") as file:
                     file.write(save_loss_info)
                 Loss_per_epoch.append(loss_per_epoch)
+
+                state_1 = {'epoch': epoch, 'state_dict': scale1_model.state_dict(),
+                            'optimizer': scale_1_optimizer.state_dict()}
+                state_2 = {'epoch': epoch, 'state_dict': scale2_model.state_dict(),
+                            'optimizer': scale_2_optimizer.state_dict()}
+                state_3 = {'epoch': epoch, 'state_dict': scale3_model.state_dict(),
+                            'optimizer': scale_3_optimizer.state_dict()}
                 scale_1_model_name = 'scale_1_model_' + str(epoch) + "_" + str(i) + '.pth'
                 if not os.path.exists(os.path.join(model_save_path, 'scale_1')):
                     os.makedirs(os.path.join(model_save_path, 'scale_1'))
                 sacle_1_model_save_path = os.path.join(model_save_path, 'scale_1', scale_1_model_name)
-                torch.save(scale1_model, sacle_1_model_save_path)
+                torch.save(state_1, sacle_1_model_save_path)
                 scale_2_model_name = 'scale_2_model_' + str(epoch) + "_" + str(i) + '.pth'
                 if not os.path.exists(os.path.join(model_save_path, 'scale_2')):
                     os.makedirs(os.path.join(model_save_path, 'scale_2'))
                 sacle_2_model_save_path = os.path.join(model_save_path, 'scale_2', scale_2_model_name)
-                torch.save(scale2_model, sacle_2_model_save_path)
+                torch.save(state_2, sacle_2_model_save_path)
                 scale_3_model_name = 'scale_3_model_' + str(epoch) + "_" + str(i) + '.pth'
                 if not os.path.exists(os.path.join(model_save_path, 'scale_3')):
                     os.makedirs(os.path.join(model_save_path, 'scale_3'))
                 sacle_3_model_save_path = os.path.join(model_save_path, 'scale_3', scale_3_model_name)
-                torch.save(scale3_model, sacle_3_model_save_path)
+                torch.save(state_3, sacle_3_model_save_path)
                 print("Epoch: {} epoch time: {:.1f}s".format(epoch, time.time() - time_epoch_start))
     show_plot(Epoch, Loss_per_epoch, 'Epoch_loss')
     print("Total train time: {:.1f}s".format(time.time() - time_train_start))
