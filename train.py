@@ -15,6 +15,9 @@ from STN import AffineTransform
 from loss import ComputeLoss
 import yaml
 
+# from pympler import muppy, summary
+# import objgraph
+
 def show_plot(iteration, loss, name):
     plt.plot(iteration, loss)
     plt.savefig('./%s' % name)
@@ -54,6 +57,8 @@ def train():
         Loss_per_batchsize = []
         time_epoch_start = time.time()
         for i, data in enumerate(dataloader):
+            # summary.print_(summary.summarize(muppy.get_objects()))
+
             ref_tensor = data[0]
             sen_tensor = data[1]
             "Scale: 1"
@@ -61,13 +66,13 @@ def train():
             scale_1_affine_parameter = scale1_model(ref_tensor, sen_tensor)
             sen_tran_tensor, ref_inv_tensor, inv_affine_parameter_1 = AffineTransform(ref_tensor, sen_tensor,
                                                                                       scale_1_affine_parameter)
-            loss_1 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
+            loss_1 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
             "Scale: 2"
             scale_2_optimizer.zero_grad()
             scale_2_affine_parameter = scale2_model(ref_tensor, sen_tran_tensor)
             sen_tran_tensor, ref_inv_tensor, inv_affine_parameter_2 = AffineTransform(ref_tensor, sen_tran_tensor,
                                                                                       scale_2_affine_parameter)
-            loss_2 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
+            loss_2 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
             "Scale: 3"
             scale_3_optimizer.zero_grad()
             scale_3_affine_parameter = scale3_model(ref_tensor, sen_tran_tensor)
@@ -75,7 +80,7 @@ def train():
                                                                                       scale_3_affine_parameter)
             # inv_affine_parameter = torch.matmul(torch.matmul(inv_affine_parameter_1, inv_affine_parameter_2),
             #                                     inv_affine_parameter_3)
-            loss_3 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'CFOG', 'SSD')
+            loss_3 = ComputeLoss(ref_tensor, sen_tran_tensor, sen_tensor, ref_inv_tensor, 'LSS', 'SSD')
             loss = 0.14285714 * loss_1 + 0.28571429 * loss_2 + 0.57142857 * loss_3
             pp = loss.detach().cpu()
             if not np.isnan(pp):
@@ -123,7 +128,7 @@ def train():
 
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    config_file = "./MU-Net/config/train.yaml"
+    config_file = "../MU-Net/config/train.yaml"
     print(config_file)
     assert (os.path.exists(config_file))
     with open(config_file, 'r') as fin:

@@ -1,1 +1,3 @@
 *.pyc
+descriptor/replay_pid27152.log
+descriptor/__pycache__/*.pyc

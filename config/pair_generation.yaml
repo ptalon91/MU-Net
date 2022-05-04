@@ -1,8 +1,8 @@
-reference_images_path: 'data/optical-infrared/ref/'
-sensed_image_path: 'data/optical-infrared/sen/'
+reference_images_path: '../data/optical-infrared/ref/'
+sensed_image_path: '../data/optical-infrared/sen/'
 image_format: ['.jpg', '.png', '.tif', '.bmp']
 resize: [512,512]
-label_save_path: 'data/optical-infrared/image_pair.txt'
+label_save_path: '../data/optical-infrared/image_pair.txt'
 is_data_augmentation: False
 sensed_image_warp_setting:
     num_warp_per_image: 2
@@ -19,4 +19,4 @@ sensed_image_warp_setting:
         is_shearX_warp: False
         is_shearY_warp: False
         shear_range: 5
-image_pair_save_path: 'data/optical-infrared/'
+image_pair_save_path: '../data/optical-infrared/'

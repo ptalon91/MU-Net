@@ -7,7 +7,7 @@ import matlab.engine
 from descriptor.LSS import denseLSS
 from descriptor.CFOG import denseCFOG
 eng = matlab.engine.start_matlab()
-eng.cd('MU-Net\descriptor',nargout=0)
+eng.cd('../MU-Net/descriptor',nargout=0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def ComputeLoss(reference, sensed_tran, sensed, reference_inv_tran, descriptor, similarity):

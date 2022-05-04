@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import matlab.engine
 eng = matlab.engine.start_matlab()
-eng.cd('MU-Net\descriptor',nargout=0)
+eng.cd('../MU-Net/descriptor',nargout=0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def denseLSS(image):
